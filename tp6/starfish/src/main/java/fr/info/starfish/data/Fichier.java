@@ -1,4 +1,4 @@
-package fr.info.Starfish.data;
+package fr.info.starfish.data;   
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -12,12 +12,15 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.BufferedOutputStream;
 import java.io.IOException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Component
 public class Fichier {
   
   private final PathMatchingResourcePatternResolver resolver;
   private String path;
+  private static final Logger logger = LoggerFactory.getLogger(Fichier.class);
   
   /*
    * Constructeur
@@ -38,7 +41,7 @@ public class Fichier {
     try {
       line = lireContenuFichier(path+file);
     } catch(IOException ioe) {
-      System.out.println.debug("Donnees Fichier - lireFichier : ["+ioe+"]");
+      logger.error("Donnees Fichier - lireFichier : ["+ioe+"]");
     }
     return line;
   }
@@ -50,7 +53,7 @@ public class Fichier {
     try {
       if(s!="") ecrireContenuFichier(path+file, s, b);
     } catch(IOException ioe) {
-      System.out.println.debug("Donnees Fichier - ecrireContenu : ["+ioe+"]");
+      logger.error("Donnees Fichier - ecrireContenu : ["+ioe+"]");
     }
   }
   
@@ -62,11 +65,11 @@ public class Fichier {
     Resource res = resolver.getResource("file:"+fileName);
     try (InputStream is = res.getInputStream()) {
       content = StreamUtils.copyToString(is, StandardCharsets.UTF_8);
-      System.out.println.debug("Donnees Fichier - lireContenuFichier : [\n" + content + "\n]");
+      logger.error("Donnees Fichier - lireContenuFichier : [\n" + content + "\n]");
       
     } 
     catch (IOException ioe) {
-      System.out.println.debug("Donnees Fichier - lireContenuFichier - erreur : ["+ioe+"]");
+      logger.error("Donnees Fichier - lireContenuFichier - erreur : ["+ioe+"]");
     }
     return content;
   }

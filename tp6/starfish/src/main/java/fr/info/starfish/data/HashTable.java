@@ -1,4 +1,4 @@
-package fr.info.Starfish.data;
+package fr.info.starfish.data;  
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -8,7 +8,7 @@ import java.util.Set;
 import java.util.StringTokenizer;
 import java.util.ArrayList;
 
-import fr.info.Starfish.data.Fichier;
+import fr.info.starfish.data.Fichier;
 
 @Component
 public class HashTable {

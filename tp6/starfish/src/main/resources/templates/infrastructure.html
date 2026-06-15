@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="ISO-8859-1">
+  <title>Catalogue</title>
+  <link rel="shortcut icon" href="/images/favicon.ico">
+  <link rel="stylesheet" type="text/css" th:href="@{/css/infrastructure.css}"/>
+</head>
+<body>
+
+  <div th:if="${menu == 'selection'}">
+    <h1>Thymeleaf : Exemple 1</h1>
+    <hr>
+    <article>
+      <ul>
+        <li><a>catalogue</a> : instance de la classe Catalogue.</li>
+        <li><a>titre, auteur, categorie</a> : Attributs de catalogue</li>
+      </ul>
+      <div th:if="${catalogue != null}">
+        <span id="catalogue" class="texte" th:text="${catalogue}" name="catalogue"></span>
+        <div class="contenu">
+          <label>Titre : </label>
+          <span class="attribut texte" th:text="${catalogue.getTitre()}" name="titre"></span>
+        </div>
+        <div class="contenu">
+          <label>Auteur : </label>
+          <span class="attribut texte" th:text="${catalogue.getAuteur()}" name="auteur"></span>
+        </div>
+        <div class="contenu">
+          <label>Categorie : </label>
+          <span class="attribut texte" th:text="${catalogue.getCategorie()}" name="categorie"></span>
+        </div>
+      </div>
+    </article>
+    <hr>
+  </div>
+
+  <div th:if="${menu == 'catalogue'}">
+    <h1>Thymeleaf : Exemple 3</h1>
+    <hr>
+    <article>
+      <form method="get" action="/ajouter">
+        <div class="contenu">
+          <label>Localisation (pays + ville, ou ville) : </label>
+          <input type="text" name="localisation"/>
+        </div>
+        <div class="contenu">
+          <label>Type : </label>
+          <input type="text" name="type" placeholder="Data Center ou Cloud"/>
+        </div>
+        <div class="contenu"><label>Portee : </label><input type="text" name="portee"/></div>
+        <div class="contenu"><label>Nombre : </label><input type="text" name="nombre"/></div>
+        <div class="contenu"><label>Complement : </label><input type="text" name="complement"/></div>
+        <input type="submit" value="Ajouter"/>
+      </form>
+    </article>
+    <hr>
+    <h1>Thymeleaf : Exemple 2</h1>
+    <hr>
+    <article>
+      <table>
+        <thead>
+          <tr><th>Id</th><th>Localisation</th>...<th>Complement</th></tr>
+        </thead>
+        <tbody>
+          <tr th:each="item : ${liste}">
+            <td th:text="${item.getId()}"></td>
+            <td th:text="${item.getLocalisation()}"></td>
+            <td th:text="${item.getVille()}"></td>
+            <td th:text="${item.getContact()}"></td>
+            <td th:text="${item.getType()}"></td>
+            <td th:text="${item.getPortee()}"></td>
+            <td th:text="${item.getNombre()}"></td>
+            <td th:text="${item.getComplement()}"></td>
+          </tr>
+        </tbody>
+      </table>
+    </article>
+    <hr>
+  </div>
+
+</body>
+</html>

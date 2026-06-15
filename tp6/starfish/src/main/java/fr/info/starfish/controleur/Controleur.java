@@ -1,4 +1,4 @@
-package fr.info.starfish;
+package fr.info.starfish.controleur;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.context.annotation.ComponentScan;
@@ -10,15 +10,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.json.JSONObject;
 import java.io.IOException;
-import fr.info.starfish.Catalogue;
+import fr.info.starfish.modele.Infrastructure;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import fr.info.starfish.services.Services;
 
 @Controller
 @ComponentScan("fr.info")
 public class Controleur {
   private final Services services;
-  private String menu = "catalogue";
+  private String menu = "infrastructure";
   private static final Logger logger = LoggerFactory.getLogger(Controleur.class);
 
   @Autowired
@@ -41,26 +42,26 @@ public class Controleur {
     return "accueil";
   }
 
-  @GetMapping("/catalogue")
+  @GetMapping("/infrastructure")
   public String liste(Model model) {
-    menu = "catalogue";
+    menu = "infrastructure";
     model.addAttribute("menu", menu);
     model.addAttribute("liste", services.liste());
-    return "catalogue";
+    return "infrastructure";
   }
 
   @GetMapping("/selection")
   public String selection(Model model) {
     menu = "selection";
     model.addAttribute("menu", menu);
-    model.addAttribute("catalogue", services.selection());
-    return "catalogue";
+    model.addAttribute("infrastructure", services.selection());
+    return "infrastructure";
   }
 
   @GetMapping("/ajouter")
-  public String ajouter(@ModelAttribute("catalogue") Catalogue catalogue, Model model) {
-    services.ajouterCatalogue(catalogue);
-    return "redirect:/catalogue";
+  public String ajouter(@ModelAttribute("infrastructure") Infrastructure infrastructure, Model model) {
+    services.ajouterInfrastructure(infrastructure);
+    return "redirect:/infrastructure";
   }
 
   @PostMapping("/search")

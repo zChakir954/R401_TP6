@@ -1,4 +1,4 @@
-package fr.info.starfish.modele; // Note bien le nouveau sous-paquetage "modele"
+package fr.info.starfish.modele; 
 
 import lombok.Data;
 
